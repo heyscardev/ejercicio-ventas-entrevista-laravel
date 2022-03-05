@@ -1,64 +1,64 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+
 
 <p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
+<a href="https://travis-ci.org/laravel/framework"><img src="public/img/poder-judicial-virtual.png" alt="Build Status"></a>
+<h1 align="center">Ejercicio Ventas Laravel</h1>
+    
+<a href="https://www.npmjs.com/package/bootstrap" rel="nofollow"><img src="https://camo.githubusercontent.com/1c4959f767490620530549105570f72a619c1531859015de2f9097367a695018/68747470733a2f2f696d672e736869656c64732e696f2f6e706d2f762f626f6f747374726170" alt="npm version" data-canonical-src="https://img.shields.io/npm/v/bootstrap" style="max-width: 100%;"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+    
 </p>
 
-## About Laravel
+## Instalacion
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+ --instanciar en el directorio servidor apache (puede ser virtual xampp, laragon).
+ --crear base de datos y modicar archivo .env con sus credenciales de mysql y el nombre de la base de datos creada.
+ --ejecutar en una terminal migraciones con  “ php artisan migrate” sin comillas y en el directorio principal del programa
+ --ejecutar en una terminal Seeders con  “ php artisan db:seed” sin comillas y en el directorio principal del programa
+ --para ejectarlo tienes dos formas:
+    1. Ejecutar en una terminal “ php artisan serve” sin comillas y en el directorio principal del programa y luego en el naveador a la url http://127.0.0.1:8000
+    2. En el navegador con el servidor apache ya iniciado la rutahttp://localhost/directorioenelservidor/ejercicio-venta/public/login
+#ojo todo estos pasos se deben hacer con el servidor mysql corriendo
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Requerimientos
+Tienes un negocio de ventas en línea donde los usuarios pueden adquirir los 5 productos que vendes, por alguna razón el impuesto es variable.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Nombre	Precio (impuesto incluido) $ 	Impuesto %
+Producto 1	123.45	5
+Producto 2	45.65	15
+Producto 3	39.73	12
+Producto 4	250.00	8
+Producto 5	59.35	10
+	Hacer sistema de gestión de facturas usando el framework Laravel, donde existirán 2 tipos de usuarios:  clientes y 1 administrador.
 
-## Learning Laravel
+	Los clientes pueden registrarse con su correo y comprar tus productos, no es necesario que muestres el historial de compras ni mucho menos crear un carrito de compras, basta con tener un Droplist con los productos y un botón de comprar, por lo que cada compra solo tendrá 1 producto.
+	El administrador podrá acceder a una página donde se le mostrará un único botón, el cual servirá para generar todas las facturas pendientes de compras que no se le hayan facturado aun a cada cliente, además en esta pagina debe de mostrase un listado con todas las facturas emitidas.
+	Para cada factura se deberá de calcular el costo total de productos que pertenezcan a la factura.
+	Calcular el impuesto cobrado
+	Crear una vista para ver el desglose de la factura, debes de poner un link en el listado de facturas para ver su desglose. 
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Debe de incluir al menos 4 tablas Usuarios, Compras, Facturas y Productos. En caso de requerir más tablas siéntete en libertad de crearlas con el nombre que creas más conveniente, de igual forma cada campo que creas necesario.
+Puedes usar de cualquier módulo de Laravel.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Pasos necesarios para resolver el problema.
+	1.- Instalar una instancia nueva de laravel.
+	2.- Crear archivos de migración correspondientes.
+	3.- Crear archivos seeder con información de prueba.
+4.- Crear las rutas necesarias para usar el sistema.
+	5.- Crear las vistas, modelos y controladores necesarios, pero no gastes el tiempo enfocándote en el diseño, nos interesa más que sea funcional.
+	6.- Crear CRUD para Productos.
+7.- Crear formularios de registro, login.
+8.- Crear formulario de compras
+	9.- Programar la función del botón para generar facturas, recuerda se debe de generar una única factura para todas las compras de un cliente que no se hayan facturado con anterioridad.
+	10.- Mostrar listado de facturas emitidas.
+	11.- Crear vista de desglose de factura, debe de tener el cliente, monto total, impuesto total y el listado de comprar que la conforman con sus 3 columnas (nombre producto, precio, impuesto) y ordenada por fecha de compra
 
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT)
+
+
+
+
