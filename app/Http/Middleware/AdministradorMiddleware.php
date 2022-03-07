@@ -16,9 +16,8 @@ class AdministradorMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if ( auth()->user()->role == 'administrador')
-        return $next($request);
-
-    return redirect()->route('dashboard');
+        if (auth()->user()->role == 'administrador')
+            return $next($request);
+        return redirect()->route('dashboard');
     }
 }

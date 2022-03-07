@@ -18,22 +18,18 @@ class FacturaSeeder extends Seeder
      */
     public function run()
     {
-       
         $factura = new Factura();
         $factura->user_id = 1;
         $factura->estado = 'pagado';
         $factura->save();
+
         $compras = Compra::whereEstado('facturado')->whereUserId($factura->user_id)->get();
-        foreach($compras as $compra){
-            $producto = Producto::find($compra->producto_id);
-            $facturaProducto = new FacturaProducto();
-            $facturaProducto->factura_id = $factura->id;
-            $facturaProducto->producto_id = $producto->id;
-            $facturaProducto->precio = $producto->precio_base;
-            $facturaProducto->impuesto = $producto->impuesto;
-            $facturaProducto->save();
+
+        foreach ($compras as $compra) {
+            $factura->productos()->attach($compra->producto_id, [
+                'precio' => $compra->producto->precioBase,
+                'impuesto' => $compra->producto->impuesto
+            ]);
         }
-        
-    
     }
 }

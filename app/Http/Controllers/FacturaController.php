@@ -18,7 +18,7 @@ class FacturaController extends Controller
     public function index()
     {
         $facturas = Factura::all()->sortByDesc('created_at');
-        return view('factura.index',compact('facturas'));
+        return view('factura.index', compact('facturas'));
     }
 
     /**
@@ -31,7 +31,6 @@ class FacturaController extends Controller
         return view('factura.create');
     }
 
-    
     /**
      * Store a newly created resource in storage.
      *
@@ -40,37 +39,29 @@ class FacturaController extends Controller
      */
     public function store(Request $request)
     {
-        $compras = Compra::where('estado','pendiente');
-       
-        if($compras->count()== 0){
+        if (Compra::where('estado', 'pendiente')->count() == 0) {
             Session::flash('warning', 'no hay compras pendientes en este momento!');
             return back();
-        }else{
-            $compras1 = new Compra();
-            $facturas = [];
-            foreach($compras1->compra_dif_user as $compra){
-               
+        } else {;
+            foreach (Compra::comprasPendientesUserUnique() as $user) {
                 $factura = new Factura();
-                $factura->user_id = $compra->user_id;
+                $factura->user_id = $user->user_id;
                 $factura->estado = 'pendiente';
                 $factura->save();
                 $facturas[] = $factura;
-                $comprasAFacturar = Compra::whereUserId($factura->user_id)->whereEstado('pendiente')->orderByDesc('created_at')->get();
-                
-                foreach($comprasAFacturar as $compra2){
-                    $detail = new FacturaProducto();
-                    $detail->factura_id = $factura->id;
-                    $detail->producto_id = $compra2->producto->id;
-                    $detail->precio = $compra2->producto->precio_base;
-                    $detail->impuesto = $compra2->producto->impuesto;
-                    $detail->save();
-                    $compra2->estado = 'facturado';
-                    $compra2->save();
+
+                foreach (Compra::comprasPendientesByUserid($user->user_id) as $compra) {
+
+                    $factura->productos()->attach($compra->producto_id, [
+                        'precio' => $compra->producto->precioBase,
+                        'impuesto' => $compra->producto->impuesto
+                    ]);
+                    $compra->estado = 'facturado';
+                    $compra->save();
                 }
             }
-           
             Session::flash('success', 'facturas generadas exitosamente');
-            return view('factura.index',compact('facturas'));
+            return view('factura.index', compact('facturas'));
         }
     }
 
@@ -82,7 +73,6 @@ class FacturaController extends Controller
      */
     public function show(Factura $factura)
     {
-        return view('factura.show',compact('factura'));
+        return view('factura.show', compact('factura'));
     }
-
 }
