@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('factura_id');
             $table->unsignedBigInteger('producto_id');
-            $table->decimal('precio',8,2);
-            $table->decimal('impuesto',8,2);
+            $table->decimal('precio', 8, 2);
+            $table->decimal('impuesto', 8, 2);
             $table->timestamps();
             $table->foreign('factura_id')->references('id')->on('facturas');
             $table->foreign('producto_id')->references('id')->on('productos');

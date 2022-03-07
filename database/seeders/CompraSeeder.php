@@ -19,42 +19,50 @@ class CompraSeeder extends Seeder
             [
                 'user_id' =>'1',
                 'producto_id' => '4',
-                'estado' => 'facturado'
+                'estado' => 'facturado',
+                'created_at' => date("Y-m-d H:i:s", strtotime('now'))
             ],
             [
                 'user_id' =>'1',
                 'producto_id' => '3',
-                'estado' => 'pendiente'
+                'estado' => 'pendiente',
+                'created_at' => date("Y-m-d H:i:s", strtotime('now'))
             ],
             [
                 'user_id' =>'2',
                 'producto_id' => '2',
-                'estado' => 'pendiente'
+                'estado' => 'pendiente',
+                'created_at' => date("Y-m-d H:i:s", strtotime('now'))
             ],
             [
                 'user_id' =>'4',
                 'producto_id' => '5',
-                'estado' => 'pendiente'
+                'estado' => 'pendiente',
+                'created_at' => date("Y-m-d H:i:s", strtotime('now'))
             ],
             [
                 'user_id' =>'2',
                 'producto_id' => '1',
-                'estado' => 'pendiente'
+                'estado' => 'pendiente',
+                'created_at' => date("Y-m-d H:i:s", strtotime('now'))
             ],
             [
                 'user_id' =>'1',
                 'producto_id' => '1',
-                'estado' => 'pendiente'
+                'estado' => 'pendiente',
+                'created_at' => date("Y-m-d H:i:s", strtotime('now'))
             ],
             [
                 'user_id' =>'4',
                 'producto_id' => '4',
-                'estado' => 'pendiente'
+                'estado' => 'pendiente',
+                'created_at' => date("Y-m-d H:i:s", strtotime('now'))
             ],
             [
                 'user_id' =>'4',
                 'producto_id' => '3',
-                'estado' => 'pendiente'
+                'estado' => 'pendiente',
+                'created_at' => date("Y-m-d H:i:s", strtotime('now'))
             ]
             
             ]);

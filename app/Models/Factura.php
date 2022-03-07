@@ -13,8 +13,7 @@ class Factura extends Model
         return $this->belongsTo(User::class);
     }
     public function productos(){
-       // return $this->hasMany(FacturaProducto::class);
-        return $this->belongsToMany(Producto::class,'factura_productos')->withPivot(['precio','impuesto'])->withTimestamps();
+        return $this->belongsToMany(Producto::class,'factura_productos')->as('details')->withPivot(['precio','impuesto'])->withTimestamps();
     }
     public function getTotalAttribute(){
        return  $this->productos()->sum('factura_productos.precio') + $this->productos()->sum('factura_productos.impuesto');
