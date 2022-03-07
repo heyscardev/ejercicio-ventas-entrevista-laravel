@@ -19,7 +19,7 @@ class ProductoController extends Controller
     public function index()
     {
         $productos = Producto::all()->sortBy('nombre');
-        return view('producto.index',compact('productos'));
+        return view('producto.index', compact('productos'));
     }
 
     /**
@@ -41,18 +41,16 @@ class ProductoController extends Controller
      */
     public function store(Request $request)
     {
-
-      $producto = new Producto();
-      $producto->nombre = $request->nombre;
-      $producto->precio  = $request->precio;
-      $producto->impuesto_porcentaje = $request->impuesto;
-      $producto->save();
-      Session::flash('success', 'Producto guardado con éxito!');
-      return redirect()->route('producto.index');
-      
+        $producto = new Producto();
+        $producto->nombre = $request->nombre;
+        $producto->precio  = $request->precio;
+        $producto->impuesto_porcentaje = $request->impuesto;
+        $producto->save();
+        Session::flash('success', 'Producto guardado con éxito!');
+        return redirect()->route('producto.index');
     }
 
-   
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -61,7 +59,7 @@ class ProductoController extends Controller
      */
     public function edit(Producto $producto)
     {
-        return(view('producto.edit',compact('producto')));
+        return (view('producto.edit', compact('producto')));
     }
 
     /**
@@ -73,7 +71,6 @@ class ProductoController extends Controller
      */
     public function update(Request $request, Producto $producto)
     {
-       
         $producto->nombre = $request->nombre;
         $producto->precio  = $request->precio;
         $producto->impuesto_porcentaje = $request->impuesto;
@@ -83,14 +80,12 @@ class ProductoController extends Controller
     }
     public function destroy(Producto $producto)
     {
-        
-        if($producto->compras()->count()== 0 && $producto->facturas()->count() == 0){
+        if ($producto->compras()->count() == 0 && $producto->facturas()->count() == 0) {
             $producto->delete();
             Session::flash('success', 'Producto eliminado con éxitó!');
-        }else{
+        } else {
             Session::flash('error', 'El producto no se puede eliminar porque fue comprado!');
         }
-        
         return back();
     }
 }

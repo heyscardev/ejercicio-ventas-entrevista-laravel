@@ -19,8 +19,6 @@ class CompraController extends Controller
         $productos = Producto::get();
         return view('compra.index', compact('productos'));
     }
-
-
     /**
      * Store a newly created resource in storage.
      *
@@ -35,6 +33,5 @@ class CompraController extends Controller
         $compra->save();
         Session::flash('success', 'producto comprado exitosamente');
         return back();
-
     }
 }

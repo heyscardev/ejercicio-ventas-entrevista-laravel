@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('productos', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre',100);
-            $table->decimal('precio',8,2)->default(0.00);
-            $table->decimal('impuesto_porcentaje',5,2);
+            $table->string('nombre', 100);
+            $table->decimal('precio', 8, 2)->default(0.00);
+            $table->decimal('impuesto_porcentaje', 5, 2);
             $table->timestamps();
         });
     }

@@ -22,21 +22,20 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 
-
-Route::group(['middleware' => ['auth','administrador']], function () {
-    
+Route::group(['middleware' => ['auth', 'administrador']], function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
     Route::resource('producto', ProductoController::class)->except(['show']);
-    Route::resource('factura', FacturaController::class)->only(['index', 'show','create','store']);
-    Route::resource('compra',CompraController::class)->only('index','store');
+    Route::resource('factura', FacturaController::class)->only(['index', 'show', 'create', 'store']);
+    Route::resource('compra', CompraController::class)->only('index', 'store');
 });
+
 Route::group(['middleware' => ['auth']], function () {
-    
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
-    Route::resource('compra',CompraController::class)->only('index','store');
+    Route::resource('compra', CompraController::class)->only('index', 'store');
 });
+
 require __DIR__ . '/auth.php';
